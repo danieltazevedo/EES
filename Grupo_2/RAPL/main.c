@@ -35,8 +35,14 @@ int main (int argc, char **argv)
   //strcpy( command, "./" );
  strcat(command,argv[1]);
  printf("Program to be executed: %s\n",argv[1]);
-
-  strcpy(command, "./" );
+ if(strstr(argv[1],"py")) {
+	strcpy(command, " " ); 
+ }
+ else {
+ 	strcpy(command, "./" );
+ }
+  
+ 
   strcat(command,argv[1]);
 
   ntimes = atoi (argv[2]);
