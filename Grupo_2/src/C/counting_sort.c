@@ -4,7 +4,6 @@
 #include <stdlib.h>
 void counting_sort(int [], int);
 int find_max(int [], int);
-void print_array(int [], int);
 
 int main(int argc, char*argv[]){
 	if(atoi(argv[1])==1 ) {	
@@ -57,13 +56,4 @@ int find_max(int a[], int length){
 		if(max < a[i]) max = a[i];
 	}
 	return max;
-}
-void print_array(int a[], int length){
-	int i = 0;
-	putchar('[');
-	do {
-		if(i > 0) printf(", ");
-		printf("%d", a[i]);
-	} while(++i < length);
-	puts("]");
 }
