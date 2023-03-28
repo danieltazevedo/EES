@@ -7,6 +7,12 @@ compile:
 	gcc -O2 C/counting_sort.c -o C/c_counting_sort
 	gcc -O2 C/insertion_sort.c -o C/c_insertion_sort
 	gcc -O2 C/quick_sort.c -o C/c_quick_sort
+	g++ -O2 C++/CountingSort.cpp -o C++/CountingSort
+	g++ -O2 C++/InsertionSort.cpp -o C++/InsertionSort
+	g++ -O2 C++/QuickSort.cpp -o C++/QuickSort
+	javac Java/CountingSort.java
+	javac Java/InsertionSort.java
+	javac Java/QuickSort.java
 
 run:
 	./counting_sort $(INPUTSIZE)
@@ -17,6 +23,10 @@ measure:
 	sudo ../RAPL/main "./C/c_counting_sort $(INPUTSIZE)" $(NTIMES)
 	sudo ../RAPL/main "./C/c_insertion_sort $(INPUTSIZE)" $(NTIMES)
 	sudo ../RAPL/main "./C/c_quick_sort $(INPUTSIZE)" $(NTIMES)
+	
+	sudo ../RAPL/main "./C++/CountingSort $(INPUTSIZE)" $(NTIMES)
+	sudo ../RAPL/main "./C++/InsertionSort $(INPUTSIZE)" $(NTIMES)
+	sudo ../RAPL/main "./C++/QuickSort $(INPUTSIZE)" $(NTIMES)
 	
 	sudo ../RAPL/main "python3 Python/counting_sort.py $(INPUTSIZE)" $(NTIMES)
 	sudo ../RAPL/main "python3 Python/insertion_sort.py $(INPUTSIZE)" $(NTIMES)
@@ -29,6 +39,10 @@ measure:
 	sudo ../RAPL/main "php PHP/CountingSort.php $(INPUTSIZE)" $(NTIMES)
 	sudo ../RAPL/main "php PHP/InsertionSort.php $(INPUTSIZE)" $(NTIMES)
 	sudo ../RAPL/main "php PHP/QuickSort.php $(INPUTSIZE)" $(NTIMES)
+	
+	sudo ../RAPL/main "java -cp Java CountingSort $(INPUTSIZE)" $(NTIMES)
+	sudo ../RAPL/main "java -cp Java InsertionSort $(INPUTSIZE)" $(NTIMES)
+	sudo ../RAPL/main "java -cp Java QuickSort $(INPUTSIZE)" $(NTIMES)
 	
 	
 
