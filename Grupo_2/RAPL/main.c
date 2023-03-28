@@ -53,7 +53,7 @@ int main(int argc, char **argv)
   strcpy(res, command);
   for (i = 0; res[i] != '\0'; i++)
   {
-    if (res[i] == '/')
+    if (res[i] == '/' && (strstr(argv[1],"py") || strstr(argv[1],"js") || strstr(argv[1],"php")))
     {
       res[i] = '_';
     }
