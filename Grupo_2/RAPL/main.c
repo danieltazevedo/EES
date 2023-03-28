@@ -43,7 +43,7 @@ int main(int argc, char **argv)
   strcpy(res, command);
   for (i = 0; res[i] != '\0'; i++)
   {
-    if (res[i] == '/')
+    if (res[i] == '/' || res[i] == '.')
     {
       res[i] = '_';
     }
