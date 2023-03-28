@@ -38,6 +38,9 @@ int main(int argc, char **argv)
   {
     strcpy(command, " ");
   }
+  else if(strstr(argv[1],"js") || strstr(argv[1],"php")) {
+    strcpy(command, "" );
+  }
   else
   {
     strcpy(command, "./");
