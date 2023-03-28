@@ -1,8 +1,85 @@
 #!/bin/bash
 
 # Instalação das dependências
-sudo apt-get update
-sudo apt-get install build-essential python3-pip -y
+# Detect the Linux distribution
+if [ -f /etc/lsb-release ]; then
+    # Ubuntu or Debian-based system
+    sudo apt-get update -y
+    sudo apt-get install python -y
+    sudo apt-get install build-essential python3-pip -y
+    sudo apt-get install openjdk-11-jdk-headless -y
+    sudo apt-get install nodejs -y
+    sudo apt-get install npm -y
+    sudo apt-get install php -y
+    sudo apt-get update -y
+elif [ -f /etc/fedora-release ]; then
+    # Fedora-based system
+    sudo dnf check-update -y
+    sudo dnf install python -y
+    sudo dnf install @development-tools python3-pip -y
+    sudo dnf install java-11-openjdk-headless -y
+    sudo dnf install nodejs -y
+    sudo dnf install npm -y
+    sudo dnf install php -y
+    sudo dnf check-update -y
+elif [ -f /etc/redhat-release ]; then
+    # Red Hat-based system
+    sudo yum check-update -y
+    sudo yum install python -y
+    sudo yum groupinstall 'Development Tools' -y
+    sudo yum install python3-pip -y
+    sudo yum install java-11-openjdk-headless -y
+    sudo yum install nodejs -y
+    sudo yum install npm -y
+    sudo yum install php -y
+    sudo yum check-update -y
+elif [ -f /etc/SuSE-release ]; then
+    # SUSE-based system
+    sudo zypper refresh
+    sudo zypper install python
+    sudo zypper install -t pattern devel_basis
+    sudo zypper install python3-pip
+    sudo zypper install java-11-openjdk-headless
+    sudo zypper install nodejs
+    sudo zypper install npm
+    sudo zypper install php
+    sudo zypper refresh
+elif [ -f /etc/slackware-version ]; then
+    # Slackware-based system
+    sudo slackpkg update
+    sudo slackpkg install python
+    sudo slackpkg install-new build-essential python3-pip
+    sudo slackpkg install openjdk-11-jdk-headless
+    sudo slackpkg install nodejs
+    sudo slackpkg install npm
+    sudo slackpkg install php
+    sudo slackpkg update
+elif [ -f /etc/arch-release ]; then
+    # Arch Linux-based system
+    sudo pacman -Sy
+    sudo pacman -Syu python
+    sudo pacman -Syu base-devel python-pip
+    sudo pacman -Syu jdk11-openjdk
+    sudo pacman -Syu nodejs
+    sudo pacman -Syu npm
+    sudo pacman -Syu php
+    sudo pacman -Sy
+elif [ -f /etc/gentoo-release ]; then
+    # Gentoo Linux-based system
+    sudo emerge --sync
+    sudo emerge -av python
+    sudo emerge -av build-essential python3-pip
+    sudo emerge -av openjdk11
+    sudo emerge -av nodejs
+    sudo emerge -av npm
+    sudo emerge -av php
+    sudo emerge --sync
+else
+    echo "Unsupported Linux distribution"
+fi
+
+# Instalação do pandas
+pip install pandas
 
 # Clone do repositório
 cd RAPL
@@ -20,9 +97,5 @@ make measure
 # Volta para o diretório raiz
 cd ..
 
-# Instalação do pandas
-pip install pandas
-
 # Execução do arquivo finalfile.py
 python3 finalfile.py
-
