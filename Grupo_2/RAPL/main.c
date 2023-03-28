@@ -34,17 +34,7 @@ int main(int argc, char **argv)
   // strcpy( command, "./" );
   strcat(command, argv[1]);
   printf("Program to be executed: %s\n", argv[1]);
-  if (strstr(argv[1], "py"))
-  {
-    strcpy(command, " ");
-  }
-  else if(strstr(argv[1],"js") || strstr(argv[1],"php")) {
-    strcpy(command, "" );
-  }
-  else
-  {
-    strcpy(command, "./");
-  }
+  strcpy(command, "");
 
   strcat(command, argv[1]);
 
@@ -53,7 +43,7 @@ int main(int argc, char **argv)
   strcpy(res, command);
   for (i = 0; res[i] != '\0'; i++)
   {
-    if (res[i] == '/' && (strstr(argv[1],"py") || strstr(argv[1],"js") || strstr(argv[1],"php")))
+    if (res[i] == '/')
     {
       res[i] = '_';
     }
