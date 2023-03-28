@@ -5,7 +5,7 @@ sudo apt-get update
 sudo apt-get install build-essential python3-pip -y
 
 # Clone do repositório
-cd rapl
+cd RAPL
 
 # Compilação do RAPL
 make
