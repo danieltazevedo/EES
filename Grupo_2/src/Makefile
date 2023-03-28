@@ -4,9 +4,9 @@ export INPUTSIZE
 export NTIMES
 
 compile:
-	gcc -O2 C/counting_sort.c -o counting_sort_c
-	gcc -O2 C/insertion_sort.c -o insertion_sort_c
-	gcc -O2 C/quick_sort.c -o quick_sort_c
+	gcc -O2 C/counting_sort.c -o c_counting_sort
+	gcc -O2 C/insertion_sort.c -o c_insertion_sort
+	gcc -O2 C/quick_sort.c -o c_quick_sort
 
 run:
 	./counting_sort $(INPUTSIZE)
@@ -14,9 +14,9 @@ run:
 	./quick_sort $(INPUTSIZE)
 
 measure: 
-	sudo ../RAPL/main "counting_sort_c $(INPUTSIZE)" $(NTIMES)
-	sudo ../RAPL/main "insertion_sort_c $(INPUTSIZE)" $(NTIMES)
-	sudo ../RAPL/main "quick_sort_c $(INPUTSIZE)" $(NTIMES)
+	sudo ../RAPL/main "c_counting_sort $(INPUTSIZE)" $(NTIMES)
+	sudo ../RAPL/main "c_insertion_sort $(INPUTSIZE)" $(NTIMES)
+	sudo ../RAPL/main "c_quick_sort $(INPUTSIZE)" $(NTIMES)
 	
 	sudo ../RAPL/main "python3 Python/counting_sort.py $(INPUTSIZE)" $(NTIMES)
 	sudo ../RAPL/main "python3 Python/insertion_sort.py $(INPUTSIZE)" $(NTIMES)
