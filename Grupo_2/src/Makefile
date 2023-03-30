@@ -20,29 +20,29 @@ run:
 	./quick_sort $(INPUTSIZE)
 
 measure: 
-	sudo ../RAPL/main "./C/c_counting_sort $(INPUTSIZE)" $(NTIMES)
-	sudo ../RAPL/main "./C/c_insertion_sort $(INPUTSIZE)" $(NTIMES)
-	sudo ../RAPL/main "./C/c_quick_sort $(INPUTSIZE)" $(NTIMES)
+	sudo ../RAPL/main "./C/c_counting_sort $(INPUTSIZE)" $(NTIMES) C_counting_sort
+	sudo ../RAPL/main "./C/c_insertion_sort $(INPUTSIZE)" $(NTIMES) C_insertion_sort
+	sudo ../RAPL/main "./C/c_quick_sort $(INPUTSIZE)" $(NTIMES) c_quick_sort
 	
-	sudo ../RAPL/main "./C++/CountingSort $(INPUTSIZE)" $(NTIMES)
-	sudo ../RAPL/main "./C++/InsertionSort $(INPUTSIZE)" $(NTIMES)
-	sudo ../RAPL/main "./C++/QuickSort $(INPUTSIZE)" $(NTIMES)
+	sudo ../RAPL/main "./C++/CountingSort $(INPUTSIZE)" $(NTIMES) C++_counting_sort
+	sudo ../RAPL/main "./C++/InsertionSort $(INPUTSIZE)" $(NTIMES) C++_insertion_sort
+	sudo ../RAPL/main "./C++/QuickSort $(INPUTSIZE)" $(NTIMES) C++_quick_sort
 	
-	sudo ../RAPL/main "python3 Python/counting_sort.py $(INPUTSIZE)" $(NTIMES)
-	sudo ../RAPL/main "python3 Python/insertion_sort.py $(INPUTSIZE)" $(NTIMES)
-	sudo ../RAPL/main "python3 Python/quick_sort.py $(INPUTSIZE)" $(NTIMES)
+	sudo ../RAPL/main "python3 Python/counting_sort.py $(INPUTSIZE)" $(NTIMES) Python_counting_sort
+	sudo ../RAPL/main "python3 Python/insertion_sort.py $(INPUTSIZE)" $(NTIMES) Python_insertion_sort
+	sudo ../RAPL/main "python3 Python/quick_sort.py $(INPUTSIZE)" $(NTIMES)	Python_quick_sort
 	
-	sudo ../RAPL/main "node JavaScript/CountingSort.js $(INPUTSIZE)" $(NTIMES)
-	sudo ../RAPL/main "node JavaScript/InsertionSort.js $(INPUTSIZE)" $(NTIMES)
-	sudo ../RAPL/main "node JavaScript/QuickSort.js $(INPUTSIZE)" $(NTIMES)
+	sudo ../RAPL/main "node JavaScript/CountingSort.js $(INPUTSIZE)" $(NTIMES) JavaScript_counting_sort
+	sudo ../RAPL/main "node JavaScript/InsertionSort.js $(INPUTSIZE)" $(NTIMES) JavaScript_insertion_sort
+	sudo ../RAPL/main "node JavaScript/QuickSort.js $(INPUTSIZE)" $(NTIMES) JavaScript_quick_sort
 	
-	sudo ../RAPL/main "php PHP/CountingSort.php $(INPUTSIZE)" $(NTIMES)
-	sudo ../RAPL/main "php PHP/InsertionSort.php $(INPUTSIZE)" $(NTIMES)
-	sudo ../RAPL/main "php PHP/QuickSort.php $(INPUTSIZE)" $(NTIMES)
+	sudo ../RAPL/main "php PHP/CountingSort.php $(INPUTSIZE)" $(NTIMES) PHP_counting_sort
+	sudo ../RAPL/main "php PHP/InsertionSort.php $(INPUTSIZE)" $(NTIMES) PHP_insertion_sort
+	sudo ../RAPL/main "php PHP/QuickSort.php $(INPUTSIZE)" $(NTIMES) PHP_quick_sort
 	
-	sudo ../RAPL/main "java -cp Java CountingSort $(INPUTSIZE)" $(NTIMES)
-	sudo ../RAPL/main "java -cp Java InsertionSort $(INPUTSIZE)" $(NTIMES)
-	sudo ../RAPL/main "java -cp Java QuickSort $(INPUTSIZE)" $(NTIMES)
+	sudo ../RAPL/main "java -cp Java CountingSort $(INPUTSIZE)" $(NTIMES) Java_counting_sort
+	sudo ../RAPL/main "java -cp Java InsertionSort $(INPUTSIZE)" $(NTIMES) Java_insertion_sort
+	sudo ../RAPL/main "java -cp Java QuickSort $(INPUTSIZE)" $(NTIMES) Java_quick_sort
 	
 	
 

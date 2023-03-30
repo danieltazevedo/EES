@@ -40,14 +40,7 @@ int main(int argc, char **argv)
 
   ntimes = atoi(argv[2]);
 
-  strcpy(res, command);
-  for (i = 0; res[i] != '\0'; i++)
-  {
-    if (res[i] == '/' || res[i] == '.')
-    {
-      res[i] = '_';
-    }
-  }
+  strcpy(res, argv[3]);
   strcat(res, ".J");
   printf("Command: %s  %d-times res: %s\n", command, ntimes, res);
 
