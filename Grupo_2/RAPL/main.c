@@ -55,7 +55,7 @@ int main(int argc, char **argv)
   for (i = 0; i < ntimes; i++)
   {
     sleep(1); // sleep 1 second
-    fprintf(fp, "%s , ", argv[1]);
+    fprintf(fp, "%s , ", res);
     rapl_before(fp, core);
 
 #ifdef RUNTIME
