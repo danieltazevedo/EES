@@ -22,7 +22,7 @@ run:
 measure: 
 	sudo ../RAPL/main "./C/c_counting_sort $(INPUTSIZE)" $(NTIMES) C counting_sort
 	sudo ../RAPL/main "./C/c_insertion_sort $(INPUTSIZE)" $(NTIMES) C insertion_sort
-	sudo ../RAPL/main "./C/c_quick_sort $(INPUTSIZE)" $(NTIMES) c quick_sort
+	sudo ../RAPL/main "./C/c_quick_sort $(INPUTSIZE)" $(NTIMES) C quick_sort
 	
 	sudo ../RAPL/main "./C++/CountingSort $(INPUTSIZE)" $(NTIMES) C++ counting_sort
 	sudo ../RAPL/main "./C++/InsertionSort $(INPUTSIZE)" $(NTIMES) C++ insertion_sort
