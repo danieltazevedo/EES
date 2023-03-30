@@ -50,12 +50,13 @@ int main(int argc, char **argv)
   fp = fopen(res, "w");
   rapl_init(core);
 
-  fprintf(fp, "Program, Package , Core(s) , GPU , DRAM? , Time (sec) \n");
+  fprintf(fp, "Language, Program, Package , Core(s) , GPU , DRAM? , Time (sec) \n");
 
   for (i = 0; i < ntimes; i++)
   {
     sleep(1); // sleep 1 second
     fprintf(fp, "%s,", argv[3]);
+    fprintf(fp, "%s,", argv[4]);
     rapl_before(fp, core);
 
 #ifdef RUNTIME
