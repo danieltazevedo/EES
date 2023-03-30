@@ -41,7 +41,8 @@ int main(int argc, char **argv)
   ntimes = atoi(argv[2]);
 
   strcpy(res, argv[3]);
-  strcpy(res, argv[4]);
+  strcat(res, "_");
+  strcat(res, argv[4]);
   strcat(res, ".J");
   printf("Command: %s  %d-times res: %s\n", command, ntimes, res);
 
