@@ -13,3 +13,5 @@ Run command inside of Grupo_2 directory.
 Example:
     
     sudo ./script.sh 1 10
+
+At the end the script generates "final.csv" with all benchmarks generated and formated.
