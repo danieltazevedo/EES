@@ -11,6 +11,8 @@ if [[ $INPUTSIZE -eq 1 || $INPUTSIZE -eq 2 || $INPUTSIZE -eq 3 ]] && [[ $NTIMES 
     if [ -f /etc/lsb-release ]; then
         # Ubuntu or Debian-based system
         sudo apt-get update -y
+        sudo apt-get install lm-sensors -y
+        sudo apt-get install make -y
         sudo apt-get install python -y
         sudo apt-get install build-essential python3-pip -y
         sudo apt-get install openjdk-11-jdk-headless -y
@@ -21,6 +23,8 @@ if [[ $INPUTSIZE -eq 1 || $INPUTSIZE -eq 2 || $INPUTSIZE -eq 3 ]] && [[ $NTIMES 
     elif [ -f /etc/fedora-release ]; then
         # Fedora-based system
         sudo dnf check-update -y
+        sudo dnf install lm_sensors -y
+        sudo dnf install make -y
         sudo dnf install python -y
         sudo dnf install @development-tools python3-pip -y
         sudo dnf install java-11-openjdk-headless -y
@@ -31,6 +35,8 @@ if [[ $INPUTSIZE -eq 1 || $INPUTSIZE -eq 2 || $INPUTSIZE -eq 3 ]] && [[ $NTIMES 
     elif [ -f /etc/redhat-release ]; then
         # Red Hat-based system
         sudo yum check-update -y
+        sudo yum install lm_sensors -y
+        sudo yum install make -y
         sudo yum install python -y
         sudo yum groupinstall 'Development Tools' -y
         sudo yum install python3-pip -y
@@ -42,6 +48,8 @@ if [[ $INPUTSIZE -eq 1 || $INPUTSIZE -eq 2 || $INPUTSIZE -eq 3 ]] && [[ $NTIMES 
     elif [ -f /etc/SuSE-release ]; then
         # SUSE-based system
         sudo zypper refresh
+        sudo zypper install lm_sensors
+        sudo zypper install make
         sudo zypper install python
         sudo zypper install -t pattern devel_basis
         sudo zypper install python3-pip
@@ -53,6 +61,8 @@ if [[ $INPUTSIZE -eq 1 || $INPUTSIZE -eq 2 || $INPUTSIZE -eq 3 ]] && [[ $NTIMES 
     elif [ -f /etc/slackware-version ]; then
         # Slackware-based system
         sudo slackpkg update
+        sudo slackpkg install lm_sensors
+        sudo slackpkg install make
         sudo slackpkg install python
         sudo slackpkg install-new build-essential python3-pip
         sudo slackpkg install openjdk-11-jdk-headless
@@ -63,6 +73,8 @@ if [[ $INPUTSIZE -eq 1 || $INPUTSIZE -eq 2 || $INPUTSIZE -eq 3 ]] && [[ $NTIMES 
     elif [ -f /etc/arch-release ]; then
         # Arch Linux-based system
         sudo pacman -Sy
+        sudo pacman -Syu lm_sensors
+        sudo pacman -Syu make
         sudo pacman -Syu python
         sudo pacman -Syu base-devel python-pip
         sudo pacman -Syu jdk11-openjdk
@@ -73,6 +85,8 @@ if [[ $INPUTSIZE -eq 1 || $INPUTSIZE -eq 2 || $INPUTSIZE -eq 3 ]] && [[ $NTIMES 
     elif [ -f /etc/gentoo-release ]; then
         # Gentoo Linux-based system
         sudo emerge --sync
+        sudo emerge -av lm_sensors
+        sudo emerge -av make
         sudo emerge -av python
         sudo emerge -av build-essential python3-pip
         sudo emerge -av openjdk11
@@ -104,5 +118,6 @@ else
     echo "sudo ./script.sh INPUTSIZE NTIMES"
     echo -e "INPUTSIZE:\n\t1 = array of 100 elements\n\t2 = array of 50 elements\n\t3 = array of 10 elements"
     echo "NTIMES: number of times to run the benchmark"
+    echo -e "Example:\n\tsudo ./script.sh 1 5"
     exit 1
 fi

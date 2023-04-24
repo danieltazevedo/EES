@@ -1,4 +1,3 @@
-
 /*
  *  Análise e Teste de Software
  *  João Saraiva
@@ -10,6 +9,7 @@
 #include <time.h>
 #include <math.h>
 #include "rapl.h"
+#include <dirent.h>
 
 #define RUNTIME
 
@@ -52,7 +52,7 @@ int main(int argc, char **argv)
   fp = fopen(res, "w");
   rapl_init(core);
 
-  fprintf(fp, "Language, Program, Package , Core(s) , GPU , DRAM? , Time (sec) \n");
+  fprintf(fp, "Language, Program, Package , Core(s) , GPU , DRAM? , Time (msec), Temp (C) \n");
 
   for (i = 0; i < ntimes; i++)
   {
@@ -78,8 +78,60 @@ int main(int argc, char **argv)
     rapl_after(fp, core);
 
 #ifdef RUNTIME
-    fprintf(fp, " %G \n", time_spent);
+    fprintf(fp, " %G", time_spent);
 #endif
+    
+    const char *root_path = "/sys/class/hwmon/hwmon";
+    int max_files = 0;
+    const char *max_path = NULL;
+    char wanted_path[50];
+    char real_path[50];
+    char needed_file[100];
+
+    for (int i = 0; i != -1; i++)
+    {
+        sprintf(wanted_path, "%s%d", root_path, i);
+
+        DIR *dir = opendir(wanted_path);
+        if (!dir)
+        {
+            i = -1;
+            break;
+        }
+
+        int file_count = 0;
+        struct dirent *entry;
+        while ((entry = readdir(dir)))
+        {
+            if (entry->d_type == DT_REG && strstr(entry->d_name, "_input"))
+            {
+                file_count++;
+            }
+        }
+
+        closedir(dir);
+
+        if (file_count > max_files)
+        {
+            sprintf(real_path, "%s%d", root_path, i);
+            max_files = file_count;
+            max_path = real_path;
+            sprintf(needed_file, "%s%d/temp1_input", root_path, i);
+        }
+    }
+
+    // Read temperature value from file and add it at the end of the row
+    FILE *temp_file = fopen(needed_file, "r");
+    if (temp_file != NULL) {
+      char temp_str[10];
+      if (fgets(temp_str, 10, temp_file) != NULL) {
+        double temp_value = atof(temp_str) / 1000.0;
+        fprintf(fp, ", %G", temp_value);
+      }
+      fclose(temp_file);
+    }
+    
+    fprintf(fp, "\n");
   }
 
   printf("\n\n END of PARAMETRIZED PROGRAM: \n");
