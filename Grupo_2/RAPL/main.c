@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <sys/time.h>
 #include <math.h>
 #include "rapl.h"
 #include <string.h>
@@ -16,7 +17,7 @@
 #define MAX_PATH_LENGTH 100
 
 
-char *get_file_path(const char *root_path)
+float get_CPU_temperature(const char *root_path)
 {
     int max_files = 0;
     int i = 0;
@@ -30,7 +31,7 @@ char *get_file_path(const char *root_path)
         res = snprintf(wanted_path, MAX_PATH_LENGTH, "%s%d", root_path, i);
         if (res < 0 || res >= MAX_PATH_LENGTH) {
             fprintf(stderr, "Failed to generate path.\n");
-            return NULL;
+            return 1;
         }
 
         DIR *dir = opendir(wanted_path);
@@ -56,7 +57,7 @@ char *get_file_path(const char *root_path)
             res = snprintf(end_path, MAX_PATH_LENGTH, "%s%d", root_path, i);
             if (res < 0 || res >= MAX_PATH_LENGTH) {
                 fprintf(stderr, "Failed to generate path.\n");
-                return NULL;
+                return 1;
             }
             max_files = file_count;
             sprintf(needed_file, "%s%d/temp1_input", root_path, i);
@@ -64,25 +65,19 @@ char *get_file_path(const char *root_path)
         i++;
     }
 
-    return needed_file;
-}
-
-
-float get_value_from_file(const char *result)
-{
     FILE *fp;
-    float value;
+    float value = 0.0f;
 
-    fp = fopen(result, "r");
+    fp = fopen(needed_file, "r");
     if (fp == NULL)
     {
-        printf("Error opening file: %s\n", result);
+        printf("Error opening file: %s\n", needed_file);
         return 1;
     }
 
     if (fscanf(fp, "%f", &value) != 1)
     {
-        printf("Error reading value from file: %s\n", result);
+        printf("Error reading value from file: %s\n", needed_file);
         return 1;
     }
 
@@ -134,11 +129,11 @@ int main(int argc, char **argv)
   fp = fopen(res, "w");
   rapl_init(core);
 
-  fprintf(fp, "Language , Program , Package , Core(s) , GPU , DRAM? , Time (msec) , Temp (ºC) \n");
+  fprintf(fp, "Language , Program , Package , Core(s) , GPU , DRAM? , Time (sec) , Temp (ºC) \n");
 
   for (i = 0; i < ntimes; i++)
   {
-    while (temperature = get_value_from_file(get_file_path(root_path)) > 80.00f)
+    while (temperature = get_CPU_temperature(root_path) > 80.00f)
     {
       printf("Waiting for CPU to cool down... %.2fºC > 80.00ºC \n", temperature);
       sleep(10);
@@ -152,7 +147,11 @@ int main(int argc, char **argv)
     gettimeofday(&tvb, 0);
 #endif
 
-    system(command);
+    int ret = system(command);
+if (ret == -1) {
+  printf("Error executing command\n");
+  return 1;
+}
 
 #ifdef RUNTIME
     end = clock();
@@ -164,7 +163,7 @@ int main(int argc, char **argv)
     rapl_after(fp, core);
 
 #ifdef RUNTIME
-    fprintf(fp, " %G, %.2f \n", time_spent, get_value_from_file(get_file_path(root_path)));
+    fprintf(fp, " %G, %.2f \n", time_spent, get_CPU_temperature(root_path));
 #endif
   }
 
