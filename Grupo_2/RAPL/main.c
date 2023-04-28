@@ -101,6 +101,7 @@ int main(int argc, char **argv)
   int core = 0;
   int i = 0;
   const char *root_path = "/sys/class/hwmon/hwmon";
+  float temperature = 0.0f;
 
 #ifdef RUNTIME
   clock_t begin, end;
@@ -137,7 +138,11 @@ int main(int argc, char **argv)
 
   for (i = 0; i < ntimes; i++)
   {
-    sleep(1); // sleep 1 second
+    while (temperature = get_value_from_file(get_file_path(root_path)) > 80.00f)
+    {
+      printf("Waiting for CPU to cool down... %.2fºC > 80.00ºC \n", temperature);
+      sleep(10);
+    }
     fprintf(fp, "%s,", argv[3]);
     fprintf(fp, "%s,", argv[4]);
     rapl_before(fp, core);
