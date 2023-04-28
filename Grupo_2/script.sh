@@ -116,8 +116,8 @@ if [[ $INPUTSIZE -eq 1 || $INPUTSIZE -eq 2 || $INPUTSIZE -eq 3 ]] && [[ $NTIMES 
 else
     echo "INPUTSIZE is not 1, 2, or 3 and/or NTIMES is not greater or equal than 1"
     echo "sudo ./script.sh INPUTSIZE NTIMES"
-    echo -e "INPUTSIZE:\n\t1 = array of 100 elements\n\t2 = array of 50 elements\n\t3 = array of 10 elements"
+    echo -e "INPUTSIZE:\n\t1 = array of 10 elements\n\t2 = array of 100 elements\n\t3 = array of 1000 elements"
     echo "NTIMES: number of times to run the benchmark"
-    echo -e "Example:\n\tsudo ./script.sh 1 5"
+    echo -e "Example:\n\tsudo ./script.sh 3 10"
     exit 1
 fi

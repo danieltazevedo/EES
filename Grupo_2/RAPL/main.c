@@ -134,7 +134,7 @@ int main(int argc, char **argv)
   fp = fopen(res, "w");
   rapl_init(core);
 
-  fprintf(fp, "Language , Program , Package , Core(s) , GPU , DRAM? , Time (sec) , Temp (ºC) \n");
+  fprintf(fp, "Language , Program , Package , Core(s) , GPU , DRAM? , Time (msec) , Temp (ºC) \n");
 
   for (i = 0; i < ntimes; i++)
   {
